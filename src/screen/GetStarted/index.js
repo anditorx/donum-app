@@ -30,14 +30,14 @@ const GetStarted = ({navigation}) => {
           </Text>
         </View>
         {/* button login */}
-        <View style={styles.wrapperBtnLogin}>
-          <Button
-            text="Login With Google"
-            type="login-google"
-            onPress={() => navigation.navigate('Home')}
-          />
-        </View>
       </ImageBackground>
+      <View style={styles.wrapperBtnLogin}>
+        <Button
+          text="Login With Google"
+          type="login-google"
+          onPress={() => navigation.navigate('Home')}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -54,11 +54,16 @@ const styles = StyleSheet.create({
   wrapperLogo: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 100,
+    marginTop: 50,
   },
   logo: {height: 250, width: 250},
   wrapperText: {paddingHorizontal: 30},
   text1: {fontSize: 26, fontWeight: 'bold', color: 'white'},
   text2: {fontSize: 18, color: 'white', marginTop: 10},
-  wrapperBtnLogin: {paddingHorizontal: 30, marginTop: 30},
+  wrapperBtnLogin: {
+    paddingHorizontal: 30,
+    position: 'absolute',
+    bottom: 50,
+    width: '100%',
+  },
 });
