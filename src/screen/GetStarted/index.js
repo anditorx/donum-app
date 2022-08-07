@@ -2,6 +2,7 @@ import {
   Image,
   ImageBackground,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -15,6 +16,7 @@ import {IMG_BG_GREEN, LOGO_BAIQ} from '../../res';
 const GetStarted = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle={'light-content'} backgroundColor="#3EB489" />
       <ImageBackground
         source={IMG_BG_GREEN}
         resizeMode="cover"
