@@ -7,6 +7,7 @@ import LOGO_BAIQ from './images/logo-baiq.png';
 import IMG_ACCAOUNT_BLACK from './images/account-black.png';
 import IMG_BG_GREEN from './images/img-background-green.png';
 import IMG_GOOGLE from './images/logo-google.png';
+import DUMMY_NEWS from './images/dummy-news.jpg';
 
 export {
   LOTTIE_GETSTARTED,
@@ -15,4 +16,5 @@ export {
   LOGO_BAIQ,
   IMG_BG_GREEN,
   IMG_GOOGLE,
+  DUMMY_NEWS,
 };

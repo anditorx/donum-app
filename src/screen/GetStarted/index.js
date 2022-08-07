@@ -8,15 +8,14 @@ import {
   View,
 } from 'react-native';
 import React, {useRef} from 'react';
-import LottieView from 'lottie-react-native';
 import {Button} from '../../components';
 import {responsiveWidth, windowWidth} from '../../utils';
-import {IMG_BG_GREEN, LOGO_BAIQ} from '../../res';
+import {colors, IMG_BG_GREEN, LOGO_BAIQ, strings} from '../../res';
 
 const GetStarted = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={'light-content'} backgroundColor="#3EB489" />
+      <StatusBar barStyle={'light-content'} backgroundColor={colors.primary} />
       <ImageBackground
         source={IMG_BG_GREEN}
         resizeMode="cover"
@@ -26,16 +25,14 @@ const GetStarted = ({navigation}) => {
           <Image source={LOGO_BAIQ} style={styles.logo} />
         </View>
         <View style={styles.wrapperText}>
-          <Text style={styles.text1}>Berbagi Kebaikan Itu Mudah</Text>
-          <Text style={styles.text2}>
-            Bantu Kami Dalam Membatu Sahabat, Saudara, Dan Keluarga Kami.
-          </Text>
+          <Text style={styles.text1}>{strings.titleGetStarted}</Text>
+          <Text style={styles.text2}>{strings.descGetStarted}</Text>
         </View>
-        {/* button login */}
       </ImageBackground>
+      {/* button login */}
       <View style={styles.wrapperBtnLogin}>
         <Button
-          text="Login With Google"
+          text={strings.textLoginGoogle}
           type="login-google"
           onPress={() => navigation.navigate('Home')}
         />

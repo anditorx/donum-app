@@ -1,6 +1,6 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {IMG_ACCAOUNT_BLACK} from '../../../res';
+import {IMG_ACCAOUNT_BLACK, LOGO_BAIQ} from '../../../res';
 
 const Header = ({...props}) => {
   return (
@@ -11,14 +11,9 @@ const Header = ({...props}) => {
         padding: 20,
         alignItems: 'center',
       }}>
-      <View>
-        <Text style={{fontSize: 16, color: 'black'}}>Hello!</Text>
-        <Text style={{fontSize: 22, fontWeight: 'bold', color: 'black'}}>
-          {props.name}
-        </Text>
-      </View>
+      <Image source={LOGO_BAIQ} style={{height: 50, width: 50}} />
       <TouchableOpacity>
-        <Image source={props.image} style={{height: 35, width: 35}} />
+        <Image source={props.image} style={{height: 30, width: 30}} />
       </TouchableOpacity>
     </View>
   );

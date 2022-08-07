@@ -1,2 +1,3 @@
 import Header from './Header';
-export {Header};
+import News from './News';
+export {Header, News};
