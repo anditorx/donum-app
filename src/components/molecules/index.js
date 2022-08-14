@@ -1,3 +1,4 @@
 import Header from './Header';
 import News from './News';
-export {Header, News};
+import BottomNavigator from './BottomNavigator';
+export {Header, News, BottomNavigator};

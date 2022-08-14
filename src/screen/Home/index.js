@@ -13,7 +13,7 @@ import {Button, Header, News} from '../../components';
 import {responsiveWidth, windowWidth} from '../../utils';
 import LottieView from 'lottie-react-native';
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <ScrollView>
@@ -22,7 +22,10 @@ const Home = () => {
             backgroundColor: colors.primary,
             height: 235,
           }}>
-          <Header image={IMG_ACCAOUNT_BLACK} />
+          <Header
+            image={IMG_ACCAOUNT_BLACK}
+            onPress={() => navigation.navigate('Profile')}
+          />
           <View style={{paddingHorizontal: 20}}>
             <Text style={{fontSize: 26, fontWeight: 'bold', color: 'white'}}>
               Hi, Andi

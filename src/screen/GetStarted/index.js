@@ -34,7 +34,7 @@ const GetStarted = ({navigation}) => {
         <Button
           text={strings.textLoginGoogle}
           type="login-google"
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate('MainTab')}
         />
       </View>
     </SafeAreaView>

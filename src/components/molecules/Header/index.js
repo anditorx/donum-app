@@ -12,7 +12,7 @@ const Header = ({...props}) => {
         alignItems: 'center',
       }}>
       <Image source={LOGO_BAIQ} style={{height: 50, width: 50}} />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={props?.onPress}>
         <Image source={props.image} style={{height: 30, width: 30}} />
       </TouchableOpacity>
     </View>
