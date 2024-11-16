@@ -1,69 +1,61 @@
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React from 'react';
-import {colors, DUMMY_NEWS, IMG_ACCAOUNT_BLACK, LOTTIE_AMAL} from '../../res';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {colors, IMG_ACCAOUNT_BLACK} from '../../res';
 import {Button, Header, News} from '../../components';
-import {responsiveWidth, windowWidth} from '../../utils';
+import {getDataLocalStorage, windowWidth} from '../../utils';
 import LottieView from 'lottie-react-native';
+import {LS_USER} from '../../constants/global.constants';
 
 const Home = ({navigation}) => {
+  const [user, setUser] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getUser = await getDataLocalStorage(LS_USER);
+        console.log('cl log User data from local storage:', getUser);
+        setUser(getUser);
+      } catch (error) {
+        console.error(
+          'cl log Failed to fetch user data from local storage:',
+          error,
+        );
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <ScrollView>
-        <View
-          style={{
-            backgroundColor: colors.primary,
-            height: 235,
-          }}>
+        <View style={styles.bgPrimary}>
           <Header
-            image={IMG_ACCAOUNT_BLACK}
+            image={
+              user && user.photo !== '' ? {uri: user.photo} : IMG_ACCAOUNT_BLACK
+            }
             onPress={() => navigation.navigate('Profile')}
           />
-          <View style={{paddingHorizontal: 20}}>
-            <Text style={{fontSize: 26, fontWeight: 'bold', color: 'white'}}>
-              Hi, Andi
-            </Text>
-            <Text style={{fontSize: 16, color: 'white'}}>
+          <View style={styles.paddingHorizontal}>
+            <Text style={styles.txtUserLoginHome}>Hi, {user?.name}</Text>
+            <Text style={styles.subTextHero}>
               Anda sudah melakukan donasi sebesar Rp200.000 sejak menggunakan
               Baiq!
             </Text>
           </View>
         </View>
         {/* hero */}
-        <View style={{marginHorizontal: 20, marginTop: -60}}>
-          <View
-            style={{
-              backgroundColor: '#DEE9FD',
-              width: windowWidth - 40,
-              justifyContent: 'space-between',
-              alignSelf: 'center',
-              borderRadius: 15,
-              flexDirection: 'row',
-              paddingVertical: 20,
-            }}>
+        <View style={styles.wrapperSectionHero}>
+          <View style={styles.wrapperCardHome}>
             <LottieView
               source={require('../../res/assets/lottie/lottie-amal.json')}
               loop={true}
               autoPlay={true}
               resizeMode="cover"
-              style={{height: 120, width: 120}}
+              style={styles.lottieHome}
             />
-            <View style={{paddingHorizontal: 20}}>
-              <View style={{marginLeft: -10}}>
-                <Text
-                  style={{
-                    fontSize: 14,
-                    color: 'black',
-                    fontWeight: 'bold',
-                    textAlign: 'right',
-                  }}>
+            <View style={styles.paddingHorizontal}>
+              <View style={styles.marginLeft}>
+                <Text style={styles.txtInsideCard}>
                   Donasi Sekarang Mudah{'\n'}
                   Dimanapun & Kapanpun{'\n'}
                   Tinggal Tap Saja!
@@ -74,16 +66,8 @@ const Home = ({navigation}) => {
           </View>
         </View>
         {/* end hero */}
-        <View style={{padding: 20}}>
-          <Text
-            style={{
-              fontWeight: 'bold',
-              color: 'black',
-              fontSize: 16,
-              marginBottom: 15,
-            }}>
-            Berita
-          </Text>
+        <View style={styles.padding}>
+          <Text style={styles.txtTitleSection}>Berita</Text>
           {/* news */}
           <News />
           <News />
@@ -98,4 +82,36 @@ export default Home;
 
 const styles = StyleSheet.create({
   safeAreaView: {flex: 1, backgroundColor: 'white'},
+  bgPrimary: {
+    backgroundColor: colors.primary,
+    height: 235,
+  },
+  wrapperSectionHero: {marginHorizontal: 20, marginTop: -60},
+  wrapperCardHome: {
+    backgroundColor: '#DEE9FD',
+    width: windowWidth - 40,
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+    borderRadius: 15,
+    flexDirection: 'row',
+    paddingVertical: 20,
+  },
+  txtTitleSection: {
+    fontWeight: 'bold',
+    color: 'black',
+    fontSize: 16,
+    marginBottom: 15,
+  },
+  txtInsideCard: {
+    fontSize: 14,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'right',
+  },
+  txtUserLoginHome: {fontSize: 26, fontWeight: 'bold', color: 'white'},
+  paddingHorizontal: {paddingHorizontal: 20},
+  subTextHero: {fontSize: 16, color: 'white'},
+  lottieHome: {height: 120, width: 120},
+  marginLeft: {marginLeft: -10},
+  padding: {padding: 20},
 });

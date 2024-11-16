@@ -6,10 +6,30 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {colors, IC_BACK, IMG_ACCAOUNT_BLACK} from '../../res';
+import {getDataLocalStorage} from '../../utils';
+import {LS_USER} from '../../constants/global.constants';
 
 const Profile = ({navigation}) => {
+  const [user, setUser] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getUser = await getDataLocalStorage(LS_USER);
+        console.log('cl log User data from local storage:', getUser);
+        setUser(getUser);
+      } catch (error) {
+        console.error(
+          'cl log Failed to fetch user data from local storage:',
+          error,
+        );
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.wrapper_bg}>
@@ -19,10 +39,16 @@ const Profile = ({navigation}) => {
           <Image source={IC_BACK} style={styles.ic_back} />
         </TouchableOpacity>
         <TouchableOpacity>
-          <Image source={IMG_ACCAOUNT_BLACK} style={styles.avatar} />
+          <Image
+            source={
+              user && user.photo !== '' ? {uri: user.photo} : IMG_ACCAOUNT_BLACK
+            }
+            style={styles.avatar}
+          />
         </TouchableOpacity>
         <View style={styles.wrapper_name}>
-          <Text style={styles.text_name}>Andi Rustianto</Text>
+          <Text style={styles.text_name}>{user ? user?.name : ''}</Text>
+          <Text style={styles.text_email}>{user ? user?.email : ''}</Text>
         </View>
       </View>
     </SafeAreaView>
@@ -47,10 +73,12 @@ const styles = StyleSheet.create({
     width: 35,
   },
   avatar: {
-    height: 100,
-    width: 100,
+    height: 125,
+    width: 125,
     alignSelf: 'center',
-    marginTop: 25,
+    borderRadius: 125 / 2,
+    borderWidth: 4,
+    borderColor: 'white',
   },
   wrapper_name: {justifyContent: 'center', alignItems: 'center'},
   text_name: {
@@ -59,8 +87,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingTop: 10,
   },
+  text_email: {
+    color: 'white',
+    fontSize: 16,
+  },
   wrapper_bg: {
     backgroundColor: colors.primary,
-    height: 235,
+    height: 275,
   },
 });
